@@ -8,12 +8,12 @@
 - Inicializamos proyecto:
     - Usando npm init, con la node@latest (v24.4.1)
 
-- [#1 PR : feat/project_structure ](https://github.com/aabril/dailytrends/pull/1)
+- First part: [#1 PR : feat/project_structure ](https://github.com/aabril/dailytrends/pull/1)
     - Añadimos dependencias que voy a usar 
     - Creo una estructura de directorio inicial
     - Añado un primer test (database.test.ts) para jest
 
-- [#2 PR : feat/database_and_feed_model ](https://github.com/aabril/dailytrends/pull/2)
+- Second part: [#2 PR : feat/database_and_feed_model ](https://github.com/aabril/dailytrends/pull/2) && [#4 PR: feat/database_and_feed_model 2nd part](https://github.com/aabril/dailytrends/pull/4)
     - Añadimos `moongose` a las dependencias
     - Añado un docker-compose con mongo local (luego lo ampliaré para esta propia app)
     - Modificar el docker para tenerlo multistage y reducir el tamaño de las imagenes de contenedores
@@ -21,7 +21,8 @@
     - añadir documentación de las capas de abstracción de "Feed"
     - añadir tests para la conexión con la base de datos con Mocks (el mocking aqui a veces se complica)
     - añadir primeras definiciones de Feed, empezaremos de lowerst a higher abstraction: tipo -> modelo -> repo -> servicio -> controller
-
+    - añadir tests para FeedService & Feed.model 
+    - añadir funcionamiento de feed en las diferentes capas
 
 ## Feed layer abstractions
 
