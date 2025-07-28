@@ -47,5 +47,13 @@ describe('ScrapingService', () => {
       expect(mockFeedRepository.count).toHaveBeenCalled();
       expect(count).toBe(5);
     });
+
+    test('should handle repository errors when getting feed count', async () => {
+      const errorMessage = 'Database connection failed';
+      mockFeedRepository.count.mockRejectedValue(new Error(errorMessage));
+      
+      await expect(scrapingService.getFeedCount()).rejects.toThrow(errorMessage);
+      expect(mockFeedRepository.count).toHaveBeenCalled();
+    });
   });
 });
