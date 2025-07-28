@@ -10,4 +10,8 @@ export class ScrapingService {
   hasRepository(): boolean {
     return this.feedRepository !== null && this.feedRepository !== undefined;
   }
+
+  async getFeedCount(): Promise<number> {
+    return await this.feedRepository.count();
+  }
 }

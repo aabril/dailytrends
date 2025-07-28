@@ -38,5 +38,14 @@ describe('ScrapingService', () => {
       const hasRepository = scrapingService.hasRepository();
       expect(hasRepository).toBe(true);
     });
+
+    test('should get feed count from repository', async () => {
+      mockFeedRepository.count.mockResolvedValue(5);
+      
+      const count = await scrapingService.getFeedCount();
+      
+      expect(mockFeedRepository.count).toHaveBeenCalled();
+      expect(count).toBe(5);
+    });
   });
 });
