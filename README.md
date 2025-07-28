@@ -49,9 +49,10 @@ From higher to lower:
 I rebuild the Dockerfile to be multistage, since the image was heavy because all the node_modules dependencies.
 The size of the image has been reduced from 717Mb to 376.
 
+```bash
 dailytrends-app-legacy    latest    96a2dfe15361   3 minutes ago   717MB
 dailytrends-app-light     latest    7436142e1301   3 seconds ago   376MB
-
+```
 
 ###### legacy 
 
