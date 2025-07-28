@@ -37,8 +37,15 @@ export const Logger = {
   
   debug: (message: string, meta?: any) => {
     logger.debug(message, meta);
-  }
-
+  },
+  
+  database: {
+    connected: () => logger.info('✅ Database connected successfully'),
+    disconnected: () => logger.info('✅ Database disconnected'),
+    reconnected: () => logger.info('📡 MongoDB reconnected'),
+    alreadyConnected: () => logger.info('🔄 Database is already connected'),
+    notConnected: () => logger.warn('⚠️ Database is not connected')
+  },
 };
 
 export default Logger;
