@@ -1,0 +1,20 @@
+{
+  "name": "dailytrends",
+  "version": "0.0.1",
+  "description": "DailyTrends es un periódico que une las portadas de los periódicos número uno.",
+  "homepage": "https://github.com/aabril/dailytrends#readme",
+  "bugs": {
+    "url": "https://github.com/aabril/dailytrends/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aabril/dailytrends.git"
+  },
+  "license": "AGPL-3.0-or-later",
+  "author": "Albert Abril",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
