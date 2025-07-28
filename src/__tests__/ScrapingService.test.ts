@@ -190,5 +190,42 @@ describe('ScrapingService', () => {
       await expect(scrapingService.processFeedBatch(feedItems)).rejects.toThrow('Database connection failed');
       expect(mockFeedRepository.findByUrl).toHaveBeenCalledWith(feedItems[0].url);
     });
+
+    test('should handle mixed results in batch processing', async () => {
+      const feedItems = [
+        {
+          title: 'New News',
+          description: 'New description',
+          url: 'https://example.com/new-news',
+          source: 'El País' as any,
+          publishedAt: new Date(),
+          isManual: false
+        },
+        {
+          title: 'Existing News',
+          description: 'Existing description',
+          url: 'https://example.com/existing-news',
+          source: 'El País' as any,
+          publishedAt: new Date(),
+          isManual: false
+        }
+      ];
+      
+      const savedFeed = { _id: '1', ...feedItems[0] };
+      const existingFeed = { _id: '2', ...feedItems[1] };
+      
+      mockFeedRepository.findByUrl
+        .mockResolvedValueOnce(null)
+        .mockResolvedValueOnce(existingFeed);
+      mockFeedRepository.create.mockResolvedValue(savedFeed);
+      
+      const results = await scrapingService.processFeedBatch(feedItems);
+      
+      expect(mockFeedRepository.findByUrl).toHaveBeenCalledTimes(2);
+      expect(mockFeedRepository.create).toHaveBeenCalledTimes(1);
+      expect(results).toHaveLength(2);
+      expect(results[0]).toEqual(savedFeed);
+      expect(results[1]).toBeNull();
+    });
   });
 });
