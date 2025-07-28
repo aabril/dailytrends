@@ -1,0 +1,2 @@
+// Aquí "abstraeré" los logs, para evitar el uso de console.log (por seguridad, y por si queremos extraerlo a algun servicio)
+// En mi dia usaba winston, llegué a usar pino que era más ligero, supongo que usaré pino, ya veremos.

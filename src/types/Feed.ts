@@ -1,0 +1,1 @@
+// Aquí exportaré las interfaces que vaya a necesitas: las básicas, dtos, enums, etc.
