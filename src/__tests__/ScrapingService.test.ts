@@ -172,5 +172,23 @@ describe('ScrapingService', () => {
       expect(results[0]).toEqual(savedFeeds[0]);
       expect(results[1]).toEqual(savedFeeds[1]);
     });
+
+    test('should handle errors during batch processing', async () => {
+      const feedItems = [
+        {
+          title: 'News 1',
+          description: 'Description 1',
+          url: 'https://example.com/news1',
+          source: 'El País' as any,
+          publishedAt: new Date(),
+          isManual: false
+        }
+      ];
+      
+      mockFeedRepository.findByUrl.mockRejectedValue(new Error('Database connection failed'));
+      
+      await expect(scrapingService.processFeedBatch(feedItems)).rejects.toThrow('Database connection failed');
+      expect(mockFeedRepository.findByUrl).toHaveBeenCalledWith(feedItems[0].url);
+    });
   });
 });
