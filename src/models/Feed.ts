@@ -17,8 +17,7 @@ const feedSchemaObject = {
   
   url: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   },
   
   imageUrl: {
