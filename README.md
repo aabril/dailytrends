@@ -16,7 +16,30 @@
 - [#2 PR : feat/database_and_feed_model ](https://github.com/aabril/dailytrends/pull/2)
     - Añadimos `moongose` a las dependencias
     - Añado un docker-compose con mongo local (luego lo ampliaré para esta propia app)
+    - Modificar el docker para tenerlo multistage y reducir el tamaño de las imagenes de contenedores
+    - añadir documentación de Docker, docker-compose
+    - añadir documentación de las capas de abstracción de "Feed"
 
+
+## Feed layer abstractions
+
+From higher to lower:
+
+- Layer 1: HTTP/Controller (Highest Abstraction)  
+ - `FeedController.ts` : Handles HTTP requests/responses, API endpoints
+
+- Layer 2: Business Logic/Service
+ - `FeedService.ts`    : Implements business rules, validation, orchestration
+
+- Layer 3: Data Access/Repository 
+ - `FeedRepository.ts` : Abstracts database operations, CRUD methods
+
+- Layer 4: Data Model/Schema
+ - `Feed.ts`           : Mongoose schema, database validations, indexes
+
+- Layer 5: Type Definitions (Lowest Abstraction) 
+ - `Feed.ts`           : TypeScript interfaces, enums, DTOs
+ - `config.ts`         : Configuration settings
 
 ## Dockerfile simple to multistage
 
@@ -59,3 +82,6 @@ EXPOSE 3000
 CMD ["node", "dist/index.js"]
 
 ```
+
+
+
