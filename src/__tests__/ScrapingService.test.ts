@@ -28,5 +28,10 @@ describe('ScrapingService', () => {
     test('should create ScrapingService instance', () => {
       expect(scrapingService).toBeInstanceOf(ScrapingService);
     });
+
+    test('should return service name', () => {
+      const serviceName = scrapingService.getServiceName();
+      expect(serviceName).toBe('ScrapingService');
+    });
   });
 });
