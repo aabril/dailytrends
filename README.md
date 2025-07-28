@@ -29,20 +29,20 @@
 From higher to lower:
 
 - Layer 1: HTTP/Controller (Highest Abstraction)  
- - `FeedController.ts` : Handles HTTP requests/responses, API endpoints
+  - `FeedController.ts` : Handles HTTP requests/responses, API endpoints
 
 - Layer 2: Business Logic/Service
- - `FeedService.ts`    : Implements business rules, validation, orchestration
+  - `FeedService.ts`    : Implements business rules, validation, orchestration
 
 - Layer 3: Data Access/Repository 
- - `FeedRepository.ts` : Abstracts database operations, CRUD methods
+  - `FeedRepository.ts` : Abstracts database operations, CRUD methods
 
 - Layer 4: Data Model/Schema
- - `Feed.ts`           : Mongoose schema, database validations, indexes
+  - `Feed.ts`           : Mongoose schema, database validations, indexes
 
 - Layer 5: Type Definitions (Lowest Abstraction) 
- - `Feed.ts`           : TypeScript interfaces, enums, DTOs
- - `config.ts`         : Configuration settings
+  - `Feed.ts`           : TypeScript interfaces, enums, DTOs
+  - `config.ts`         : Configuration settings
 
 ## Dockerfile simple to multistage
 
