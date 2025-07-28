@@ -9,11 +9,13 @@
     - Usando npm init, con la node@latest (v24.4.1)
 
 - First part: [#1 PR : feat/project_structure ](https://github.com/aabril/dailytrends/pull/1)
-    - Añadimos dependencias que voy a usar 
-    - Creo una estructura de directorio inicial
-    - Añado un primer test (database.test.ts) para jest
+    - Crea un proyecto TypeScript con una arquitectura de ficheros que consideres apropiada.
+      - Añadimos dependencias que voy a usar 
+      - Creo una estructura de directorio inicial
+      - Añado un primer test (database.test.ts) para jest
 
 - Second part: [#2 PR : feat/database_and_feed_model ](https://github.com/aabril/dailytrends/pull/2) && [#4 PR: feat/database_and_feed_model 2nd part](https://github.com/aabril/dailytrends/pull/4)
+  - Crea un modelo Feed y define sus atributos. El origen de datos tiene que ser MongoDB, por lo que puedes usar algún ODM.
     - Añadimos `moongose` a las dependencias
     - Añado un docker-compose con mongo local (luego lo ampliaré para esta propia app)
     - Modificar el docker para tenerlo multistage y reducir el tamaño de las imagenes de contenedores
@@ -23,6 +25,11 @@
     - añadir primeras definiciones de Feed, empezaremos de lowerst a higher abstraction: tipo -> modelo -> repo -> servicio -> controller
     - añadir tests para FeedService & Feed.model 
     - añadir funcionamiento de feed en las diferentes capas
+
+- Third part: [#5 PR : feat/add_endpoints ](https://github.com/aabril/dailytrends/pull/5)
+  - Define los diferentes endpoints para gestionar los servicios CRUD del modelo Feed. Intenta desacoplar las capas del API lo máximo posible.
+    - reemplazar index por server.ts
+    - implement a basic server.ts in server.ts
 
 ## Feed layer abstractions
 
