@@ -19,4 +19,9 @@ export class ScrapingService {
   async saveFeedItem(feedData: Omit<IFeed, '_id' | 'createdAt' | 'updatedAt'>): Promise<IFeed> {
     return await this.feedRepository.create(feedData);
   }
+
+  async feedExists(url: string): Promise<boolean> {
+    const existingFeed = await this.feedRepository.findByUrl(url);
+    return existingFeed !== null;
+  }
 }

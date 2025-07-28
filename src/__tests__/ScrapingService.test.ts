@@ -74,5 +74,25 @@ describe('ScrapingService', () => {
       expect(mockFeedRepository.create).toHaveBeenCalledWith(feedData);
       expect(result).toEqual(savedFeed);
     });
+
+    test('should check if feed exists by URL', async () => {
+      const testUrl = 'https://example.com/news';
+      const existingFeed = {
+        _id: '1',
+        title: 'Existing News',
+        description: 'Existing description',
+        url: testUrl,
+        source: 'El País' as any,
+        publishedAt: new Date(),
+        isManual: false
+      };
+      
+      mockFeedRepository.findByUrl.mockResolvedValue(existingFeed);
+      
+      const exists = await scrapingService.feedExists(testUrl);
+      
+      expect(mockFeedRepository.findByUrl).toHaveBeenCalledWith(testUrl);
+      expect(exists).toBe(true);
+    });
   });
 });
