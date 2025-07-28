@@ -32,4 +32,13 @@ export class ScrapingService {
     }
     return await this.saveFeedItem(feedData);
   }
+
+  async processFeedBatch(feedItems: Omit<IFeed, '_id' | 'createdAt' | 'updatedAt'>[]): Promise<(IFeed | null)[]> {
+    const results: (IFeed | null)[] = [];
+    for (const feedItem of feedItems) {
+      const result = await this.saveIfNotExists(feedItem);
+      results.push(result);
+    }
+    return results;
+  }
 }

@@ -135,5 +135,42 @@ describe('ScrapingService', () => {
       expect(mockFeedRepository.create).not.toHaveBeenCalled();
       expect(result).toBeNull();
     });
+
+    test('should process multiple feed items and return results', async () => {
+      const feedItems = [
+        {
+          title: 'News 1',
+          description: 'Description 1',
+          url: 'https://example.com/news1',
+          source: 'El País' as any,
+          publishedAt: new Date(),
+          isManual: false
+        },
+        {
+          title: 'News 2',
+          description: 'Description 2',
+          url: 'https://example.com/news2',
+          source: 'El País' as any,
+          publishedAt: new Date(),
+          isManual: false
+        }
+      ];
+      
+      const savedFeeds = [
+        { _id: '1', ...feedItems[0] },
+        { _id: '2', ...feedItems[1] }
+      ];
+      
+      mockFeedRepository.findByUrl.mockResolvedValue(null);
+      mockFeedRepository.create.mockResolvedValueOnce(savedFeeds[0]).mockResolvedValueOnce(savedFeeds[1]);
+      
+      const results = await scrapingService.processFeedBatch(feedItems);
+      
+      expect(mockFeedRepository.findByUrl).toHaveBeenCalledTimes(2);
+      expect(mockFeedRepository.create).toHaveBeenCalledTimes(2);
+      expect(results).toHaveLength(2);
+      expect(results[0]).toEqual(savedFeeds[0]);
+      expect(results[1]).toEqual(savedFeeds[1]);
+    });
   });
 });
