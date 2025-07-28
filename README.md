@@ -19,6 +19,8 @@
     - Modificar el docker para tenerlo multistage y reducir el tamaño de las imagenes de contenedores
     - añadir documentación de Docker, docker-compose
     - añadir documentación de las capas de abstracción de "Feed"
+    - añadir tests para la conexión con la base de datos con Mocks (el mocking aqui a veces se complica)
+    - añadir primeras definiciones de Feed, empezaremos de lowerst a higher abstraction: tipo -> modelo -> repo -> servicio -> controller
 
 
 ## Feed layer abstractions
