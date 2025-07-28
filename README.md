@@ -1,9 +1,26 @@
 # dailytrends
 
+## Tareas a realizar
+- [*]  Crea un proyecto TypeScript con una arquitectura de ficheros que consideres apropiada.
 
+- [*] | Crea un modelo Feed y define sus atributos. 
+      | El origen de datos tiene que ser MongoDB, por lo que puedes usar algún ODM.
+
+- [*] | Define los diferentes endpoints para gestionar los servicios CRUD del modelo Feed. 
+      | Intenta desacoplar las capas del API lo máximo posible.
+
+- [ ] | Crea un “servicio de lectura de feeds” que extraiga por web scraping (no lectura de fuentes RSS) 
+      | en cada uno de los periódicos sus noticias de portada y que las guarde como Feeds. 
+      | Esta es la parte donde más conceptos de orientación a objetos puedes usar y la más “compleja”, ponle especial atención.
+
+> Otros detalles
+- Representa en un dibujo la arquitectura y las capas de la aplicación.
+- Usa todas las buenas prácticas que conozcas.
+- Demuestra conocimientos en programación orientada a objetos: 
+  - abstracción, encapsulamiento, herencia y polimorfismo.
+  - Haz los tests que consideres necesarios.
 
 ## Changelog
-
 
 - Inicializamos proyecto:
     - Usando npm init, con la node@latest (v24.4.1)
