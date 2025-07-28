@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-
+import config from './config'
 
 export class DatabaseConnection {
     private static instance: DatabaseConnection;
@@ -37,7 +37,7 @@ export class DatabaseConnection {
         });
   
         mongoose.connection.on('disconnected', () => {
-          console.log('MongoDB connection disconnected', { error });
+          console.log('MongoDB connection disconnected');
           this.isConnected = false;
         });
   
