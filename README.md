@@ -1,5 +1,6 @@
 # dailytrends
 
+
 ## Tareas a realizar
 - [*]  Crea un proyecto TypeScript con una arquitectura de ficheros que consideres apropiada.
 
@@ -47,6 +48,9 @@
   - Define los diferentes endpoints para gestionar los servicios CRUD del modelo Feed. Intenta desacoplar las capas del API lo máximo posible.
     - reemplazar index por server.ts
     - implement a basic server.ts in server.ts
+    - implement endpoints and their tests
+    - troubleshooting: update jest.config and tsconfig to allow test use dependencies
+
 
 ## Feed layer abstractions
 
@@ -110,6 +114,3 @@ EXPOSE 3000
 CMD ["node", "dist/index.js"]
 
 ```
-
-
-
