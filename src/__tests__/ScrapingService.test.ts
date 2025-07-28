@@ -33,5 +33,10 @@ describe('ScrapingService', () => {
       const serviceName = scrapingService.getServiceName();
       expect(serviceName).toBe('ScrapingService');
     });
+
+    test('should have access to repository', () => {
+      const hasRepository = scrapingService.hasRepository();
+      expect(hasRepository).toBe(true);
+    });
   });
 });

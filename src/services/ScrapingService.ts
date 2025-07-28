@@ -6,4 +6,8 @@ export class ScrapingService {
   getServiceName(): string {
     return 'ScrapingService';
   }
+
+  hasRepository(): boolean {
+    return this.feedRepository !== null && this.feedRepository !== undefined;
+  }
 }
