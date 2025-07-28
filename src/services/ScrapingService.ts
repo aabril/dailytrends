@@ -24,4 +24,12 @@ export class ScrapingService {
     const existingFeed = await this.feedRepository.findByUrl(url);
     return existingFeed !== null;
   }
+
+  async saveIfNotExists(feedData: Omit<IFeed, '_id' | 'createdAt' | 'updatedAt'>): Promise<IFeed | null> {
+    const exists = await this.feedExists(feedData.url);
+    if (exists) {
+      return null;
+    }
+    return await this.saveFeedItem(feedData);
+  }
 }

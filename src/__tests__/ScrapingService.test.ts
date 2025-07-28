@@ -94,5 +94,26 @@ describe('ScrapingService', () => {
       expect(mockFeedRepository.findByUrl).toHaveBeenCalledWith(testUrl);
       expect(exists).toBe(true);
     });
+
+    test('should save feed item only if it does not exist', async () => {
+      const feedData = {
+        title: 'New News',
+        description: 'New description',
+        url: 'https://example.com/new-news',
+        source: 'El País' as any,
+        publishedAt: new Date(),
+        isManual: false
+      };
+      
+      const savedFeed = { _id: '2', ...feedData };
+      mockFeedRepository.findByUrl.mockResolvedValue(null);
+      mockFeedRepository.create.mockResolvedValue(savedFeed);
+      
+      const result = await scrapingService.saveIfNotExists(feedData);
+      
+      expect(mockFeedRepository.findByUrl).toHaveBeenCalledWith(feedData.url);
+      expect(mockFeedRepository.create).toHaveBeenCalledWith(feedData);
+      expect(result).toEqual(savedFeed);
+    });
   });
 });
