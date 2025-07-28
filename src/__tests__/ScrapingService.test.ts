@@ -55,5 +55,24 @@ describe('ScrapingService', () => {
       await expect(scrapingService.getFeedCount()).rejects.toThrow(errorMessage);
       expect(mockFeedRepository.count).toHaveBeenCalled();
     });
+
+    test('should save feed item to repository', async () => {
+      const feedData = {
+        title: 'Test News',
+        description: 'Test description',
+        url: 'https://example.com/news',
+        source: 'El País' as any,
+        publishedAt: new Date(),
+        isManual: false
+      };
+      
+      const savedFeed = { _id: '1', ...feedData };
+      mockFeedRepository.create.mockResolvedValue(savedFeed);
+      
+      const result = await scrapingService.saveFeedItem(feedData);
+      
+      expect(mockFeedRepository.create).toHaveBeenCalledWith(feedData);
+      expect(result).toEqual(savedFeed);
+    });
   });
 });
