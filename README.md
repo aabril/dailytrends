@@ -51,6 +51,9 @@
     - implement endpoints and their tests
     - troubleshooting: update jest.config and tsconfig to allow test use dependencies
 
+- Fourth part: [#6 PR : feat/scraper](https://github.com/aabril/dailytrends/pull/6)
+  - Crea un “servicio de lectura de feeds” que extraiga por web scraping 
+    - 
 
 ## Feed layer abstractions
 
