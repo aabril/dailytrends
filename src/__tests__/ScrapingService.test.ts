@@ -115,5 +115,25 @@ describe('ScrapingService', () => {
       expect(mockFeedRepository.create).toHaveBeenCalledWith(feedData);
       expect(result).toEqual(savedFeed);
     });
+
+    test('should return null when trying to save existing feed', async () => {
+      const feedData = {
+        title: 'Existing News',
+        description: 'Existing description',
+        url: 'https://example.com/existing-news',
+        source: 'El País' as any,
+        publishedAt: new Date(),
+        isManual: false
+      };
+      
+      const existingFeed = { _id: '1', ...feedData };
+      mockFeedRepository.findByUrl.mockResolvedValue(existingFeed);
+      
+      const result = await scrapingService.saveIfNotExists(feedData);
+      
+      expect(mockFeedRepository.findByUrl).toHaveBeenCalledWith(feedData.url);
+      expect(mockFeedRepository.create).not.toHaveBeenCalled();
+      expect(result).toBeNull();
+    });
   });
 });
