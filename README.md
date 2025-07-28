@@ -16,3 +16,46 @@
 - [#2 PR : feat/database_and_feed_model ](https://github.com/aabril/dailytrends/pull/2)
     - Añadimos `moongose` a las dependencias
     - Añado un docker-compose con mongo local (luego lo ampliaré para esta propia app)
+
+
+## Dockerfile simple to multistage
+
+I rebuild the Dockerfile to be multistage, since the image was heavy because all the node_modules dependencies.
+The size of the image has been reduced from 717Mb to 376.
+
+dailytrends-app-legacy    latest    96a2dfe15361   3 minutes ago   717MB
+dailytrends-app-light     latest    7436142e1301   3 seconds ago   376MB
+
+
+###### legacy 
+
+```Dockerfile
+FROM node:24-slim
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+EXPOSE 3000
+CMD ["node", "dist/index.js"]
+```
+
+###### light
+
+```Dockerfile
+FROM node:24-slim AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+
+FROM node:24-slim AS production
+WORKDIR /app
+COPY package*.json ./
+RUN npm install --production
+COPY --from=builder /app/dist ./dist
+EXPOSE 3000
+CMD ["node", "dist/index.js"]
+
+```
