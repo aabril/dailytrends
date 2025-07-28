@@ -1,6 +1,5 @@
-
-
 export interface IConfig {
+  port: number;
   mongodbUri: string;
   nodeEnv: string;
 }
@@ -8,11 +7,13 @@ export interface IConfig {
 class Config implements IConfig {
   private static instance: Config;
 
+  public readonly port: number;
   public readonly mongodbUri: string;
   public readonly nodeEnv: string;
 
 
   private constructor() {
+    this.port = parseInt(process.env.PORT || '4000', 10);
     this.mongodbUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/dailytrends';
     this.nodeEnv = process.env.NODE_ENV || 'development';
 
