@@ -46,6 +46,17 @@ export const Logger = {
     alreadyConnected: () => logger.info('🔄 Database is already connected'),
     notConnected: () => logger.warn('⚠️ Database is not connected')
   },
+
+  server: {
+    starting: (port: number, env: string) => {
+      logger.info(undefined, `🚀 Starting DailyTrends API server on port ${port}`);
+      logger.info(undefined, `📱 Environment: ${env}`);
+      logger.info(undefined, `🔗 Health check: http://localhost:${port}/health`);
+      logger.info(undefined, `📰 API Base URL: http://localhost:${port}/api/v1`);
+    },
+    running: (port: number) => logger.info(undefined, `✅ Server is running on http://localhost:${port}`),
+    shutdown: (signal: string) => logger.info(undefined, `\n🛑 Received ${signal}, shutting down gracefully...`)
+  },
 };
 
 export default Logger;
