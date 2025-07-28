@@ -47,7 +47,7 @@ From higher to lower:
 ## Dockerfile simple to multistage
 
 I rebuild the Dockerfile to be multistage, since the image was heavy because all the node_modules dependencies.
-The size of the image has been reduced from 717Mb to 376.
+The size of the image has been reduced from **717 Mb** to **376 Mb**.
 
 ```bash
 dailytrends-app-legacy    latest    96a2dfe15361   3 minutes ago   717MB
