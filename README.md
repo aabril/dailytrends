@@ -53,7 +53,7 @@
 
 - Fourth part: [#6 PR : feat/scraper](https://github.com/aabril/dailytrends/pull/6)
   - Crea un “servicio de lectura de feeds” que extraiga por web scraping 
-    - 
+    - we are going to be implementing a Factory for the scraper, since we are going to input values and then will build our custom class
 
 ## Feed layer abstractions
 
