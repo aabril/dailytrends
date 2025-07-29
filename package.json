@@ -18,6 +18,8 @@
     "build": "tsc",
     "start": "node dist/server.js",
     "dev": "tsx watch src/server.ts",
+    "scraper": "node dist/scraper.js",
+    "scraper:dev": "tsx watch src/scraper.ts",
     "test": "jest",
     "test:watch": "jest --watch",
     "lint": "eslint src/**/*.ts",

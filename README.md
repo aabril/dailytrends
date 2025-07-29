@@ -51,6 +51,9 @@
     - implement endpoints and their tests
     - troubleshooting: update jest.config and tsconfig to allow test use dependencies
 
+- Fourth part: [#6 PR : feat/scraper](https://github.com/aabril/dailytrends/pull/6)
+  - Crea un “servicio de lectura de feeds” que extraiga por web scraping 
+    - we are going to be implementing a Factory for the scraper, since we are going to input values and then will build our custom class
 
 ## Feed layer abstractions
 
@@ -114,3 +117,44 @@ EXPOSE 3000
 CMD ["node", "dist/index.js"]
 
 ```
+
+
+###  Scraper OOP 
+
+#### Entrypoint
+- `scraper.ts`                     - Application entry point that initializes the scraping system
+
+#### Core Services
+- `ScrapingScheduler.ts`           - Orchestrates scraping cycles and timing
+- `ContentScrapingService.ts`      - Handles web content scraping logic
+- `FeedReaderService.ts`           - Manages newspaper extraction
+- `ScrapingService.ts`             - Base scraping functionality
+
+#### Utilities
+- `WebScraper.ts`                  - HTML parsing and data extraction utility
+- `logger.ts`                      - Logging utility
+
+#### Extractors
+- `BaseNewspaperExtractor.ts`      - clase Abstract Base
+- `ElPaisExtractor.ts`             - especificación / extractor para El País 
+- `ElMundoExtractor.ts`            - especificación / extractor para El Mundo
+- `NewspaperExtractorFactory.ts`   - clase Factory  para crear extractors
+
+#### Types & Interfaces
+- `Feed.ts`                        - tipos y interfaces
+- `NewspaperTypes.ts`              - configuración de las interfaces
+- `FeedRepository.ts`              - abstracción interfaz de la base de datos
+
+## Propiedades de OOP
+
+- He intentado seguir las propiedades de OOP. Ejemplo:
+  - separación de responsabilidades: con las capas de abstracción, y servicios dedicados
+  - Factory de los extractors en NewspaperExtractorFactory, básicamente, patrón de diseño que nos ayuda a crear objetos de una clase específica, basados en ciertos parámetros, y así lo adaptamos a nuestros periodicos favoritos.
+  - Herencia, desde BaseNewspaperExtractor a los extractors.
+  - Utils, para tener DRY y poder usarlo desde diferentes classes.
+  - He intentando poner tests donde sea necesario, y de forma que tenga sentido.
+
+
+Obviamente cualquier propuesta está siempre abierta a debate y a mejoras. 
+En mi caso, y dentro de las limitaciones, he intentado seguir las instrucciones y ver como lo podemos adaptar. 
+Seguramente con más tiempo se puede simplificar más sin perder funcionalidades.
