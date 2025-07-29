@@ -1,5 +1,5 @@
-import { IFeedRepository } from '../repositories/FeedRepository';
-import { IFeed } from '../types/Feed';
+import { IFeedRepository } from '../repositories/FeedRepository.js';
+import { IFeed } from '../types/Feed.js';
 
 export class ScrapingService {
   constructor(private feedRepository: IFeedRepository) {}
