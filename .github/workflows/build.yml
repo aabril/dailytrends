@@ -20,9 +20,10 @@ jobs:
 
       - name: Setup Docker
         run: |
-          sudo systemctl start docker
+          sudo service docker start || sudo /etc/init.d/docker start || true
           sudo usermod -aG docker $USER
           sudo chmod 666 /var/run/docker.sock
+          newgrp docker || true
 
       - name: Build Docker image
         run: |
