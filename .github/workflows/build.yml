@@ -10,14 +10,29 @@ jobs:
   build:
     runs-on: slimbook-ubuntu-latest
     
+    services:
+      docker:
+        image: docker:dind
+        options: --privileged
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
         
+      - name: Set up Docker
+        run: |
+          export DOCKER_HOST=tcp://docker:2376
+          export DOCKER_TLS_CERTDIR=""
+          docker info
+        
       - name: Build Docker image
         run: |
+          export DOCKER_HOST=tcp://docker:2376
+          export DOCKER_TLS_CERTDIR=""
           docker build -t dailytrends:latest .
           
       - name: Test Docker image
         run: |
+          export DOCKER_HOST=tcp://docker:2376
+          export DOCKER_TLS_CERTDIR=""
           docker run --rm dailytrends:latest node --version
