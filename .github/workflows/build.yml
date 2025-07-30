@@ -17,15 +17,10 @@ jobs:
           ref: ${{ github.ref }}
           fetch-depth: 0
         
-      - name: Install Podman
+      - name: Build Docker image
         run: |
-          sudo apt-get update
-          sudo apt-get install -y podman
-        
-      - name: Build container image with Podman
-        run: |
-          podman build -t dailytrends:latest .
+          sudo docker build -t dailytrends:latest .
           
-      - name: Test container image
+      - name: Test Docker image
         run: |
-          podman run --rm dailytrends:latest node --version
+          sudo docker run --rm dailytrends:latest node --version
