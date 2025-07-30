@@ -10,7 +10,7 @@
 - [*] | Define los diferentes endpoints para gestionar los servicios CRUD del modelo Feed. 
       | Intenta desacoplar las capas del API lo máximo posible.
 
-- [ ] | Crea un “servicio de lectura de feeds” que extraiga por web scraping (no lectura de fuentes RSS) 
+- [*] | Crea un “servicio de lectura de feeds” que extraiga por web scraping (no lectura de fuentes RSS) 
       | en cada uno de los periódicos sus noticias de portada y que las guarde como Feeds. 
       | Esta es la parte donde más conceptos de orientación a objetos puedes usar y la más “compleja”, ponle especial atención.
 

@@ -1,0 +1,32 @@
+name: Build Docker Image
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build Docker image
+        run: |
+          docker build -t dailytrends:latest .
+          echo "Docker image built successfully!"
+
+      - name: Test image
+        run: |
+          docker run --rm dailytrends:latest node --version
+          echo "Image test completed!"
