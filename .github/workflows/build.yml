@@ -35,8 +35,16 @@ jobs:
           
       - name: Build container image
         run: |
-          podman build -t dailytrends:latest .
-
+          if [ "$CONTAINER_CMD" = "podman" ]; then
+            podman build -t dailytrends:latest .
+          else
+            sudo docker build -t dailytrends:latest .
+          fi
+          
       - name: Test container image
         run: |
-          podman run --rm dailytrends:latest node --version
+          if [ "$CONTAINER_CMD" = "podman" ]; then
+            podman run --rm dailytrends:latest node --version
+          else
+            sudo docker run --rm dailytrends:latest node --version
+          fi
