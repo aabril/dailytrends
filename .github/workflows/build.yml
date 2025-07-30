@@ -20,10 +20,10 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t dailytrends:latest .
+          sudo docker build -t dailytrends:latest .
           echo "Docker image built successfully!"
 
       - name: Test image
         run: |
-          docker run --rm dailytrends:latest node --version
+          sudo docker run --rm dailytrends:latest node --version
           echo "Image test completed!"
