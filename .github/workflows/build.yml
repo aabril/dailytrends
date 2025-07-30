@@ -18,6 +18,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Setup Docker
+        run: |
+          sudo systemctl start docker
+          sudo usermod -aG docker $USER
+          sudo chmod 666 /var/run/docker.sock
+
       - name: Build Docker image
         run: |
           sudo docker build -t dailytrends:latest .
