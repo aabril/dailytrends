@@ -17,10 +17,34 @@ jobs:
           ref: ${{ github.ref }}
           fetch-depth: 0
         
-      - name: Build Docker image
+      - name: Detect container runtime
         run: |
-          sudo docker build -t dailytrends:latest .
+          echo "Checking container runtime..."
+          if command -v podman >/dev/null 2>&1; then
+            echo "CONTAINER_CMD=podman" >> $GITHUB_ENV
+            echo "Using Podman"
+            podman --version
+          elif command -v docker >/dev/null 2>&1; then
+            echo "CONTAINER_CMD=docker" >> $GITHUB_ENV
+            echo "Using Docker"
+            docker --version
+          else
+            echo "Neither Docker nor Podman found!"
+            exit 1
+          fi
           
-      - name: Test Docker image
+      - name: Build container image
         run: |
-          sudo docker run --rm dailytrends:latest node --version
+          if [ "$CONTAINER_CMD" = "podman" ]; then
+            podman build -t dailytrends:latest .
+          else
+            sudo docker build -t dailytrends:latest .
+          fi
+          
+      - name: Test container image
+        run: |
+          if [ "$CONTAINER_CMD" = "podman" ]; then
+            podman run --rm dailytrends:latest node --version
+          else
+            sudo docker run --rm dailytrends:latest node --version
+          fi
