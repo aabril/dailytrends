@@ -17,16 +17,15 @@ jobs:
           ref: ${{ github.ref }}
           fetch-depth: 0
         
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-        with:
-          driver: docker-container
-          install: true
+      - name: Install Podman
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y podman
         
-      - name: Build Docker image
+      - name: Build container image with Podman
         run: |
-          docker build -t dailytrends:latest .
+          podman build -t dailytrends:latest .
           
-      - name: Test Docker image
+      - name: Test container image
         run: |
-          docker run --rm dailytrends:latest node --version
+          podman run --rm dailytrends:latest node --version
