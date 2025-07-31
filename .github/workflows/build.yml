@@ -3,7 +3,7 @@ name: Test Workflow
 on:
   push:
     branches:
-      - main
+      # - main
       - feat/gitea-actions
   pull_request:
 
