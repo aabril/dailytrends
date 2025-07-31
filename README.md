@@ -7,12 +7,12 @@
   - ✅ Crea un proyecto TypeScript con una arquitectura de ficheros que consideres apropiada.
 
 - Segundo paso
-  -  ✅ Crea un modelo Feed y define sus atributos. 
-  -  ✅ El origen de datos tiene que ser MongoDB, por lo que puedes usar algún ODM.
+  - ✅ Crea un modelo Feed y define sus atributos. 
+  - ✅ El origen de datos tiene que ser MongoDB, por lo que puedes usar algún ODM.
 
 - Tercer paso
-  -  ✅ Define los diferentes endpoints para gestionar los servicios CRUD del modelo Feed. 
-  -  ✅ Intenta desacoplar las capas del API lo máximo posible.
+  - ✅ Define los diferentes endpoints para gestionar los servicios CRUD del modelo Feed. 
+  - ✅ Intenta desacoplar las capas del API lo máximo posible.
 
 - Cuarto paso 
   - ✅ Crea un “servicio de lectura de feeds” que extraiga por web scraping (no lectura de fuentes RSS) 
