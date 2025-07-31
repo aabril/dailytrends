@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: slimbook-ubuntu-latest
+    runs-on: n100-ubuntu-latest
     
     steps:
       - name: Checkout repository
