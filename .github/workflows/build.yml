@@ -3,7 +3,6 @@ name: Test Workflow
 on:
   push:
     branches:
-      # - main
       - feat/gitea-actions
   pull_request:
 
@@ -26,6 +25,5 @@ jobs:
       - name: Run tests
         run: npm test
 
-      # - name: Build Docker image
-      # - uses: actions/checkout@v3
-      #   run: docker build -t dailytrends:latest .
+      - name: Build Docker image
+        run: docker build -t dailytrends:latest .
