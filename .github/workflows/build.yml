@@ -1,50 +1,27 @@
-name: Build Docker Image
+name: Test Workflow
 
 on:
   push:
-    branches: [ main, master ]
+    branches:
+      - main
   pull_request:
-    branches: [ main, master ]
 
 jobs:
   build:
-    runs-on: n100-ubuntu-latest
-    
+    runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          ref: ${{ github.ref }}
-          fetch-depth: 0
-        
-      - name: Detect container runtime
-        run: |
-          echo "Checking container runtime..."
-          if command -v podman >/dev/null 2>&1; then
-            echo "CONTAINER_CMD=podman" >> $GITHUB_ENV
-            echo "Using Podman"
-            podman --version
-          elif command -v docker >/dev/null 2>&1; then
-            echo "CONTAINER_CMD=docker" >> $GITHUB_ENV
-            echo "Using Docker"
-            docker --version
-          else
-            echo "Neither Docker nor Podman found!"
-            exit 1
-          fi
-          
-      - name: Build container image
-        run: |
-          if [ "$CONTAINER_CMD" = "podman" ]; then
-            podman build -t dailytrends:latest .
-          else
-            sudo docker build -t dailytrends:latest .
-          fi
-          
-      - name: Test container image
-        run: |
-          if [ "$CONTAINER_CMD" = "podman" ]; then
-            podman run --rm dailytrends:latest node --version
-          else
-            sudo docker run --rm dailytrends:latest node --version
-          fi
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
