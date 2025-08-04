@@ -32,19 +32,19 @@ export class ContentScrapingService {
   async scrapeFromWebUrls(urls: string[], source: NewsSource): Promise<ScrapingResult> {
     Logger.info(`Starting web scraping from ${urls.length} URLs for ${source}`);
     
-    const feedItems: Omit<IFeed, '_id' | 'createdAt' | 'updatedAt'>[] = [];
-    
-    for (const url of urls) {
+    // Functional approach: parallel processing with Promise.all and map
+    const scrapingPromises = urls.map(async (url) => {
       try {
         const scrapedData = await this.webScraper.scrapeUrl(url);
-        if (scrapedData) {
-          const feedData = this.webScraper.convertToFeedData(scrapedData, source);
-          feedItems.push(feedData);
-        }
+        return scrapedData ? this.webScraper.convertToFeedData(scrapedData, source) : null;
       } catch (error) {
         Logger.error(`Error scraping URL ${url}:`, error);
+        return null;
       }
-    }
+    });
+
+    const scrapingResults = await Promise.all(scrapingPromises);
+    const feedItems = scrapingResults.filter((item): item is Omit<IFeed, '_id' | 'createdAt' | 'updatedAt'> => item !== null);
 
     if (feedItems.length === 0) {
       Logger.warn(`No items scraped from web URLs`);
