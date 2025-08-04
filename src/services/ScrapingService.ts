@@ -34,11 +34,7 @@ export class ScrapingService {
   }
 
   async processFeedBatch(feedItems: Omit<IFeed, '_id' | 'createdAt' | 'updatedAt'>[]): Promise<(IFeed | null)[]> {
-    const results: (IFeed | null)[] = [];
-    for (const feedItem of feedItems) {
-      const result = await this.saveIfNotExists(feedItem);
-      results.push(result);
-    }
-    return results;
+    const savePromises = feedItems.map(feedItem => this.saveIfNotExists(feedItem));
+    return Promise.all(savePromises);
   }
 }
