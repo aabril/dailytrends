@@ -78,17 +78,19 @@ export class ContentScrapingService {
   async scrapeFromMultipleSources(configs: NewsSourceConfig[]): Promise<Map<string, ScrapingResult>> {
     Logger.info(`Starting batch scraping from ${configs.length} sources`);
     
-    const results = new Map<string, ScrapingResult>();
-    
-    for (const config of configs) {
+    // Functional approach: parallel processing with Promise.all and map
+    const scrapingPromises = configs.map(async (config): Promise<[string, ScrapingResult]> => {
       try {
         const result = await this.scrapeFromSource(config);
-        results.set(config.name, result);
+        return [config.name, result];
       } catch (error) {
         Logger.error(`Error scraping source ${config.name}:`, error);
-        results.set(config.name, { success: 0, failed: 1, duplicates: 0, items: [] });
+        return [config.name, { success: 0, failed: 1, duplicates: 0, items: [] }];
       }
-    }
+    });
+
+    const resultEntries = await Promise.all(scrapingPromises);
+    const results = new Map(resultEntries);
 
     const totalStats = this.calculateTotalStats(results);
     Logger.info(`Batch scraping completed: ${totalStats.success} total success, ${totalStats.failed} total failed, ${totalStats.duplicates} total duplicates`);
